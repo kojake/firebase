@@ -205,6 +205,12 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCamera()
+        
+        let captureButton = UIButton(type: .system)
+        captureButton.setTitle("Capture", for: .normal)
+        captureButton.addTarget(self, action: #selector(captureButtonTapped(_:)), for: .touchUpInside)
+        captureButton.frame = CGRect(x: 0, y: view.bounds.height - 100, width: view.bounds.width, height: 100)
+        view.addSubview(captureButton)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -255,7 +261,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         delegate?.didFinishTaking(photo: photo)
     }
 
-    @IBAction func captureButtonTapped(_ sender: UIButton) {
+    @objc private func captureButtonTapped(_ sender: UIButton) {
         takePhoto()
     }
 
